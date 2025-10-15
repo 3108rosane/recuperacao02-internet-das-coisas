@@ -1,0 +1,311 @@
+[
+    {
+        "id": "03d3cdec4cad8c73",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "51dbe18bf4b4b75e",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "932723bf02c75edb",
+        "type": "mongodb4-client",
+        "name": "MongoDb",
+        "protocol": "mongodb",
+        "hostname": "mongo",
+        "port": "27017",
+        "dbName": "iot",
+        "appName": "",
+        "authSource": "",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "0",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    },
+    {
+        "id": "6c3bc1daa0b87323",
+        "type": "postgreSQLConfig",
+        "name": "postgres",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": 5432,
+        "portFieldType": "num",
+        "database": "postgres",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": 10,
+        "maxFieldType": "num",
+        "idle": 1000,
+        "idleFieldType": "num",
+        "connectionTimeout": 10000,
+        "connectionTimeoutFieldType": "num",
+        "user": "aluno",
+        "userFieldType": "str",
+        "password": "aluno123",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "bab20baebeb501af",
+        "type": "mqtt-broker",
+        "name": "broker",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "79d4eb4cae3c95e6",
+        "type": "mqtt in",
+        "z": "03d3cdec4cad8c73",
+        "name": "Device info",
+        "topic": "`device/+/info`",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "51dbe18bf4b4b75e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "27bb2cba85f56a96"
+            ]
+        ]
+    },
+    {
+        "id": "27bb2cba85f56a96",
+        "type": "uuid",
+        "z": "03d3cdec4cad8c73",
+        "uuidVersion": "v4",
+        "namespaceType": "",
+        "namespace": "",
+        "namespaceCustom": "",
+        "name": "",
+        "field": "payload._id",
+        "fieldType": "msg",
+        "x": 350,
+        "y": 120,
+        "wires": [
+            [
+                "2ccabf7395a4c403"
+            ]
+        ]
+    },
+    {
+        "id": "b50111b280b194e3",
+        "type": "uuid",
+        "z": "03d3cdec4cad8c73",
+        "uuidVersion": "v4",
+        "namespaceType": "",
+        "namespace": "",
+        "namespaceCustom": "",
+        "name": "",
+        "field": "payload._id",
+        "fieldType": "msg",
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "bd8c2d28b02e4b6f"
+            ]
+        ]
+    },
+    {
+        "id": "f3c50990694f8abe",
+        "type": "mqtt in",
+        "z": "03d3cdec4cad8c73",
+        "name": "status device",
+        "topic": "status",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "51dbe18bf4b4b75e",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "b50111b280b194e3",
+                "bbf9f1130da6599c"
+            ]
+        ]
+    },
+    {
+        "id": "2ccabf7395a4c403",
+        "type": "function",
+        "z": "03d3cdec4cad8c73",
+        "name": "find all devices",
+        "func": "msg.collection = \"devices\";\nmsg.operation = \"find\";\nmsg.payload = [{}, { sort: { 'status.online': -1, device_id: 1 }}]\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 120,
+        "wires": [
+            [
+                "a78ea4ee04d30f72"
+            ]
+        ]
+    },
+    {
+        "id": "bd8c2d28b02e4b6f",
+        "type": "function",
+        "z": "03d3cdec4cad8c73",
+        "name": "create command",
+        "func": "\nreturn msg;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 240,
+        "wires": [
+            [
+                "4421f32dd498b8cc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a78ea4ee04d30f72",
+        "type": "mongodb4",
+        "z": "03d3cdec4cad8c73",
+        "clientNode": "932723bf02c75edb",
+        "mode": "collection",
+        "collection": "",
+        "operation": "",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 750,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4421f32dd498b8cc",
+        "type": "postgresql",
+        "z": "03d3cdec4cad8c73",
+        "name": "postgres",
+        "query": "SELECT * FROM ;",
+        "postgreSQLConfig": "6c3bc1daa0b87323",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 960,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbf9f1130da6599c",
+        "type": "debug",
+        "z": "03d3cdec4cad8c73",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7d6601c027f6f6a5",
+        "type": "mqtt out",
+        "z": "03d3cdec4cad8c73",
+        "name": "send device",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "bab20baebeb501af",
+        "x": 990,
+        "y": 340,
+        "wires": []
+    }
+]
